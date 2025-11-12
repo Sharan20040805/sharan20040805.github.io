@@ -517,4 +517,4 @@ function initThemeSwitcher() {
 window.addEventListener('load', initThemeSwitcher);
 
 console.log('%c👋 Welcome to Sharan\'s Portfolio! ', 'font-size: 20px; color: #6366f1; font-weight: bold;');
-console.log('%cLooking at the code? I\'d love to work with you! Get in touch at sharan@example.com', 'font-size: 14px; color: #64748b;');
+console.log('%cLooking at the code? I\'d love to work with you! Get in touch at sharan2004fire@gmail.com', 'font-size: 14px; color: #64748b;');
