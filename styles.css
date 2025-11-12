@@ -5,6 +5,7 @@
 :root {
     --primary-color: #06b6d4; /* modern teal/cyan */
     --secondary-color: #0891b2;
+    --nav-height: 64px;
     --accent-color: #00e5ff;
     --dark-bg: #0a0e27;
     --light-bg: #1a1f3a;
@@ -86,37 +87,50 @@ body {
 .nav-menu {
     display: flex;
     gap: 3.5rem;
-    align-items: center;
-    margin: 0 auto;
-    width: auto;
-    justify-content: center;
-    padding: 0 20px;
-    flex-direction: row;
-}
+    /* Mobile navigation: hide menu by default; open as full-width vertical overlay when active */
+    .nav-menu {
+        display: none;
+        position: fixed;
+        top: var(--nav-height);
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(10, 14, 39, 0.98), rgba(26, 31, 58, 0.98));
+        backdrop-filter: blur(8px);
+        flex-direction: column;
+        padding: 2.25rem 1.25rem;
+        gap: 1rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+        border-top: 1px solid var(--border-color);
+        z-index: 999;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
 
-.hamburger {
-    display: none;
-}
+    .nav-menu.active {
+        display: flex;
+    }
 
-.nav-link {
-    color: var(--text-dark);
-    text-decoration: none;
-    font-weight: 600;
-    position: relative;
-    transition: all 0.3s ease;
-    font-size: 1rem;
-    letter-spacing: 0.4px;
-}
+    /* Keep navbar in-flow so it doesn't overlap but still fixed at top visually */
+    .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(135deg, rgba(10,14,39,0.98), rgba(26,31,58,0.98));
+        padding: 8px 16px;
+        border-bottom: 1px solid var(--border-color);
+        z-index: 1000;
+        height: var(--nav-height);
+    }
+    .nav-settings { position: relative; right: auto; top: auto; }
 
-.nav-settings {
-    background: transparent;
-    border: none;
-    color: var(--text-dark);
-    cursor: pointer;
-    font-size: 1.3rem;
-    padding: 8px 12px;
-    border-radius: 8px;
-    display: inline-flex;
+    /* Adjust hero spacing to account for fixed navbar */
+    .hero { padding-top: calc(var(--nav-height) + 20px); }
+
+    /* Constrain hero animation so it doesn't create horizontal overflow */
+    .hero-animation { width: min(240px, 40vw); height: auto; margin: 20px auto 0; }
+    .floating-box { width: 100%; height: auto; max-width: 240px; max-height: 240px; border-radius: 18px; }
     align-items: center;
     gap: 0.4rem;
     transition: all 0.3s ease;
@@ -845,7 +859,7 @@ body {
     .hero { 
         flex-direction: column;
         align-items: center;
-        padding: 80px 16px 40px 16px;
+        padding: calc(var(--nav-height) + 24px) 16px 40px 16px;
         text-align: center;
     }
 
@@ -889,6 +903,7 @@ body {
         padding: 12px 16px;
         border-bottom: 1px solid var(--border-color);
     }
+    .navbar { height: var(--nav-height); }
     .nav-settings { position: relative; right: auto; top: auto; }
 
     .hamburger {
