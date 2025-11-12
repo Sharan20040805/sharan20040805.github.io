@@ -47,32 +47,30 @@ body {
 
 .navbar {
     background: transparent;
-    backdrop-filter: none;
-    box-shadow: none;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    z-index: 100;
-    transition: all 0.3s ease;
-    border-bottom: none;
-    padding: 2rem 20px;
-    width: 100%;
+    z-index: 1000;
+    height: var(--nav-height);
+    display: flex;
+    align-items: center;
+    transition: all 0.25s ease;
+    padding: 0 16px;
 }
 
 .nav-container {
     max-width: 1200px;
+    width: 100%;
     margin: 0 auto;
-    padding: 1.2rem 20px;
     display: flex;
-    justify-content: center;
     align-items: center;
-    flex-direction: row;
-    gap: 2rem;
+    justify-content: space-between;
+    gap: 1rem;
 }
 
 .nav-logo {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: 700;
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     -webkit-background-clip: text;
@@ -81,124 +79,41 @@ body {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    display: none;
 }
 
 .nav-menu {
     display: flex;
-    gap: 3.5rem;
-    /* Mobile navigation: hide menu by default; open as full-width vertical overlay when active */
-    .nav-menu {
-        display: none;
-        position: fixed;
-        top: var(--nav-height);
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(135deg, rgba(10, 14, 39, 0.98), rgba(26, 31, 58, 0.98));
-        backdrop-filter: blur(8px);
-        flex-direction: column;
-        padding: 2.25rem 1.25rem;
-        gap: 1rem;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-        border-top: 1px solid var(--border-color);
-        z-index: 999;
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
-    }
-
-    .nav-menu.active {
-        display: flex;
-    }
-
-    /* Keep navbar in-flow so it doesn't overlap but still fixed at top visually */
-    .navbar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        background: linear-gradient(135deg, rgba(10,14,39,0.98), rgba(26,31,58,0.98));
-        padding: 8px 16px;
-        border-bottom: 1px solid var(--border-color);
-        z-index: 1000;
-        height: var(--nav-height);
-    }
-    .nav-settings { position: relative; right: auto; top: auto; }
-
-    /* Adjust hero spacing to account for fixed navbar */
-    .hero { padding-top: calc(var(--nav-height) + 20px); }
-
-    /* Constrain hero animation so it doesn't create horizontal overflow */
-    .hero-animation { width: min(240px, 40vw); height: auto; margin: 20px auto 0; }
-    .floating-box { width: 100%; height: auto; max-width: 240px; max-height: 240px; border-radius: 18px; }
+    gap: 2.5rem;
     align-items: center;
-    gap: 0.4rem;
-    transition: all 0.3s ease;
-    position: absolute;
-    right: 20px;
-    top: 40px;
 }
 
-.nav-settings:hover {
-    color: var(--primary-color);
-    transform: scale(1.1);
-}
+.nav-settings { position: relative; }
+
+.nav-settings:hover { color: var(--primary-color); transform: scale(1.05); }
 
 .nav-btn-enrol {
-    padding: 10px 24px;
+    padding: 10px 20px;
     border: 1.5px solid var(--primary-color);
     color: white;
     text-decoration: none;
     font-weight: 600;
     border-radius: 8px;
-    transition: all 0.3s ease;
+    background: var(--primary-color);
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: 0.9rem;
-    background: var(--primary-color);
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
+    font-size: 0.95rem;
 }
 
-.nav-btn-enrol::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-    z-index: -1;
-    transition: left 0.3s ease;
-}
-
-.nav-btn-enrol:hover {
-    color: white;
-    box-shadow: 0 6px 20px rgba(6, 182, 212, 0.4);
-    transform: translateY(-2px);
-    border-color: var(--secondary-color);
-}
-
-.nav-btn-enrol:hover::before {
-    left: 0;
-}
-
-@media (max-width: 768px) {
-    .nav-btn-enrol {
-        display: none;
-    }
-}
+.nav-btn-enrol::before { content: ''; }
 
 .nav-link {
     color: var(--text-dark);
     text-decoration: none;
     font-weight: 500;
     position: relative;
-    transition: all 0.3s ease;
-    font-size: 0.9rem;
-    letter-spacing: 0.3px;
+    transition: color 0.2s ease;
+    font-size: 0.95rem;
 }
 
 .nav-link::after {
@@ -209,32 +124,21 @@ body {
     width: 0;
     height: 2px;
     background: var(--primary-color);
-    transition: width 0.3s ease;
+    transition: width 0.25s ease;
 }
 
-.nav-link:hover {
-    color: var(--primary-color);
-}
+.nav-link:hover { color: var(--primary-color); }
+.nav-link:hover::after, .nav-link.active::after { width: 100%; }
 
-.nav-link:hover::after,
-.nav-link.active::after {
-    width: 100%;
-}
+.hamburger { display: none; flex-direction: column; cursor: pointer; }
+.hamburger span { width: 28px; height: 3px; background: var(--text-dark); margin: 6px 0; border-radius: 3px; transition: 0.3s ease; }
 
-.hamburger {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-}
+/* Ensure the hero content is pushed below the navbar to avoid overlap */
+.hero { padding-top: calc(var(--nav-height) + 20px); }
 
-.hamburger span {
-    width: 28px;
-    height: 3px;
-    background: var(--text-dark);
-    margin: 6px 0;
-    transition: 0.4s ease;
-    border-radius: 3px;
-}
+/* Constrain hero animation so it doesn't create horizontal overflow */
+.hero-animation { width: min(400px, 40vw); height: auto; margin: 20px auto 0; }
+.floating-box { width: 300px; height: 300px; max-width: 90vw; max-height: 90vw; border-radius: 18px; }
 
 /* ============================================
    HERO SECTION
