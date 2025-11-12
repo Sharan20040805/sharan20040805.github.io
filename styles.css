@@ -1083,3 +1083,47 @@ a {
     box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.12),
                 0 0 15px rgba(6, 182, 212, 0.28);
 }
+
+/* Mobile refinements: improve spacing, touch targets and readability */
+@media (max-width: 768px) {
+    /* Ensure logo shows on mobile for branding */
+    .nav-logo { display: flex; }
+
+    /* Make action buttons visible in mobile menu and easier to tap */
+    .nav-btn-enrol { display: inline-flex !important; width: auto; padding: 14px 18px; font-size: 1rem; }
+
+    /* Larger, easier to tap social icons */
+    .social-icon { width: 44px; height: 44px; font-size: 1.1rem; }
+
+    /* Tweak project card padding and image size for smaller screens */
+    .project-content { padding: 1.25rem; }
+    .project-image { height: 160px; font-size: 3rem; }
+
+    /* Slightly larger and more readable hero text */
+    .hero-title { font-size: 2.6rem; }
+    .hero-description { font-size: 1rem; }
+
+    /* Make form inputs slightly larger for mobile */
+    .contact-form input, .contact-form textarea { padding: 1.1rem; font-size: 1.05rem; }
+
+    /* Make link / action buttons larger and full-width where appropriate */
+    .btn { padding: 14px 20px; }
+    .link-btn { font-size: 1rem; padding: 0.9rem; }
+
+    /* Reduce section paddings to make content fit better on smaller viewports */
+    .about, .projects, .skills, .contact { padding: 60px 16px; }
+}
+
+@media (max-width: 480px) {
+    /* Improve spacing and layout for very small devices */
+    .nav-menu { padding: 1.5rem; }
+    .hero-title { font-size: 1.9rem; }
+    .hero-subtitle { font-size: 0.95rem; }
+    .hero-description { font-size: 0.95rem; }
+    .project-image { height: 140px; }
+    .project-content { padding: 1rem; }
+    .section-title { font-size: 1.6rem; }
+    .social-links { gap: 1rem; }
+    .social-icon { width: 40px; height: 40px; }
+    .nav-link { padding: 0.9rem 0; }
+}
