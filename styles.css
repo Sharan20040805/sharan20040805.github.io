@@ -825,8 +825,28 @@ body {
         font-size: 1.2rem;
     }
 
+    /* Keep hero animation visible on mobile but scaled down so mobile looks closer to desktop */
     .hero-animation {
-        display: none;
+        display: flex;
+        width: 260px;
+        height: 260px;
+        margin-top: 20px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .floating-box {
+        width: 220px;
+        height: 220px;
+        border-radius: 20px;
+        animation: floating 4s ease-in-out infinite;
+    }
+
+    .hero { 
+        flex-direction: column;
+        align-items: center;
+        padding: 80px 16px 40px 16px;
+        text-align: center;
     }
 
     .hero-buttons {
@@ -839,20 +859,23 @@ body {
         justify-content: space-between;
     }
 
+    /* Use a compact horizontal nav on mobile so it resembles the desktop layout */
     .nav-menu {
-        display: none;
-        position: fixed;
-        top: 80px;
-        left: 0;
-        right: 0;
-        background: linear-gradient(135deg, rgba(10, 14, 39, 0.98), rgba(26, 31, 58, 0.98));
-        backdrop-filter: blur(10px);
-        flex-direction: column;
-        padding: 2rem 1.5rem;
-        gap: 1.5rem;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-        border-bottom: 1px solid var(--border-color);
-        z-index: 99;
+        display: flex;
+        position: relative;
+        top: auto;
+        left: auto;
+        right: auto;
+        background: transparent;
+        backdrop-filter: none;
+        flex-direction: row;
+        padding: 0;
+        gap: 1rem;
+        box-shadow: none;
+        border-bottom: none;
+        z-index: 10;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
     }
 
     .nav-menu.active {
